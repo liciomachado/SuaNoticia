@@ -21,22 +21,16 @@
                 if ($rsNoticia->execute()) {
                     if ($rsNoticia->rowCount() > 0) {
                         while ($mostraNoticia = $rsNoticia->fetch(PDO::FETCH_OBJ)) {
-                            echo "<div class='col-6'>";
-                            echo "<h4>{$mostraNoticia->titulo_noticia}</h4>";
-                            echo "<p>{$mostraNoticia->resumo_noticia}</p>";
+                            echo "<div class='col-6' >";
+                            echo "<div class='card-body'>";
+                           echo "<h4><a href='detalheNoticia.php?idNoticia={$mostraNoticia->id_noticia}' class='' >{$mostraNoticia->titulo_noticia}</a></h4>";
+                            echo "<p class='card-text'>{$mostraNoticia->resumo_noticia}</p>";
                             echo "<p class='dataAdireita'>";
                             echo date_format(new DateTime($mostraNoticia->data_noticia), 'd/m/Y');
                             echo "</p>";
-
-                            echo "<td><form action='detalheNoticia.php' method='get' name='detalhes{$mostraNoticia->id_noticia}'>
-                                    <input type='hidden' name='idNoticia' value='{$mostraNoticia->id_noticia}'>
-                                    <button class='btn adireita' type='submit'><i class='fas fa-edit'></i>Mais Detalhes</button>";
-//                                  SE LOGADO : OPCOES DE DELETAR E EXCLUIR
                             
-
-                            echo"</form></td>";
-
                             echo "<br>";
+                            echo "</div>";
                             echo "</div>";
                         }
                     }
