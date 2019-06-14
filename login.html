@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+        <link href="css/styleLogin.css" rel="stylesheet">
+
+    </head>
+    <body>
+        <div class="login">
+            <img src="img/user.png" class="usuario" width="100" height="100" alt="">
+            <h1>Login</h1>
+            <form method="POST" action="db/validaLoginBanco.php">
+
+                <p>Usuario</p>
+                <input type="text" name="usuario" placeholder="Insira seu nome de usuario">
+
+                <p>Senha</p>
+                <input type="password" name="senha" placeholder="Insira sua senha">
+                    
+                <input type="submit" name="logaUsuario" value="Entrar"> 
+            </form>
+        </div>
+    </body>
+</html>
