@@ -21,7 +21,7 @@
                     if ($rsNoticia->execute()) {
                         if ($rsNoticia->rowCount() > 0) {
                             while ($mostraNoticia = $rsNoticia->fetch(PDO::FETCH_OBJ)) {
-                                echo "<div class='col-6' >";
+                                echo "<div class='col-12' >";
                                 echo "<div class='card-body'>";
                                 echo "<h4><a href='detalheNoticia.php?idNoticia={$mostraNoticia->id_noticia}' class='' >{$mostraNoticia->titulo_noticia}</a></h4>";
                                 echo "<p class='card-text'>{$mostraNoticia->resumo_noticia}</p>";
@@ -43,7 +43,7 @@
                     if ($rsNoticia->execute()) {
                         if ($rsNoticia->rowCount() > 0) {
                             while ($mostraNoticia = $rsNoticia->fetch(PDO::FETCH_OBJ)) {
-                                echo "<div class='col-6' >";
+                                echo "<div class='col-12' >";
                                 echo "<div class='card-body'>";
                                 echo "<h4><a href='detalheNoticia.php?idNoticia={$mostraNoticia->id_noticia}' class='' >{$mostraNoticia->titulo_noticia}</a></h4>";
                                 echo "<p class='card-text'>{$mostraNoticia->resumo_noticia}</p>";
