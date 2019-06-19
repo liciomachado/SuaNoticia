@@ -12,7 +12,7 @@
         <link rel="shortcut icon" href="img/iconEmpresa.png" />
 
     </head>
-    <body>
+    <body onload="carregaUser('modoUser','modoAdm')">
         <!--PUXA DADOS EMPRESA-->
         <?php
         session_start();

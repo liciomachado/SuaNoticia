@@ -9,36 +9,80 @@
             <br>
             <h1>Ultimas Notícias</h1> 
             <br>
-            <div class="row">
-                <!--PUXA O ARRAY DE NOTICIAS-->
-                <?php
-                if (isset($_SESSION['logado']) && $_SESSION['tipoConta'] == 'nivel1') {
-                    $rsNoticia = $pdo->prepare("SELECT * from tb_noticia order by id_noticia DESC");
-                } else {
-                    $rsNoticia = $pdo->prepare("SELECT * FROM tb_noticia WHERE (data_entra <= CURRENT_TIMESTAMP AND data_sai > CURRENT_TIMESTAMP) order by id_noticia desc");
-                }
+            <?php if (isset($_SESSION['logado']) && $_SESSION['tipoConta'] != 'nivel3') { ?>
+                <button id="botao-produtos" type="button" class="btn btn-dark" name="mostraAdm" onclick="carregaAdm('modoAdm', 'modoUser')">Modo administrador</button>
+                <button id="botao-clientes" type="button" class="btn btn-dark" name="mostraUser" onclick="carregaUser('modoUser', 'modoAdm')">Usuario</button>
 
+                <div class="row" id="modoAdm">
+                    <!--PUXA O ARRAY DE NOTICIAS-->
+                    <?php
+                    $rsNoticia = $pdo->prepare("SELECT * from tb_noticia order by id_noticia DESC");
+
+                    if ($rsNoticia->execute()) {
+                        if ($rsNoticia->rowCount() > 0) {
+                            while ($mostraNoticia = $rsNoticia->fetch(PDO::FETCH_OBJ)) {
+                                echo "<div class='col-6' >";
+                                echo "<div class='card-body'>";
+                                echo "<h4><a href='detalheNoticia.php?idNoticia={$mostraNoticia->id_noticia}' class='' >{$mostraNoticia->titulo_noticia}</a></h4>";
+                                echo "<p class='card-text'>{$mostraNoticia->resumo_noticia}</p>";
+                                echo "<p class='dataAdireita'>";
+                                echo date_format(new DateTime($mostraNoticia->data_noticia), 'd/m/Y');
+                                echo "</p>";
+
+                                echo "<br>";
+                                echo "</div>";
+                                echo "</div>";
+                            }
+                        }
+                    }
+                    ?>
+                </div>
+                <div class="row" id="modoUser">
+                    <?php
+                    $rsNoticia = $pdo->prepare("SELECT * FROM tb_noticia WHERE (data_entra <= CURRENT_TIMESTAMP AND data_sai > CURRENT_TIMESTAMP) order by id_noticia desc");
+                    if ($rsNoticia->execute()) {
+                        if ($rsNoticia->rowCount() > 0) {
+                            while ($mostraNoticia = $rsNoticia->fetch(PDO::FETCH_OBJ)) {
+                                echo "<div class='col-6' >";
+                                echo "<div class='card-body'>";
+                                echo "<h4><a href='detalheNoticia.php?idNoticia={$mostraNoticia->id_noticia}' class='' >{$mostraNoticia->titulo_noticia}</a></h4>";
+                                echo "<p class='card-text'>{$mostraNoticia->resumo_noticia}</p>";
+                                echo "<p class='dataAdireita'>";
+                                echo date_format(new DateTime($mostraNoticia->data_noticia), 'd/m/Y');
+                                echo "</p>";
+
+                                echo "<br>";
+                                echo "</div>";
+                                echo "</div>";
+                            }
+                        }
+                    }
+                    ?>
+                    <!--FIM ARRAY NOTICIAS-->
+
+                </div>
+                <?php
+            } else {
+                $rsNoticia = $pdo->prepare("SELECT * FROM tb_noticia WHERE (data_entra <= CURRENT_TIMESTAMP AND data_sai > CURRENT_TIMESTAMP) order by id_noticia desc");
                 if ($rsNoticia->execute()) {
                     if ($rsNoticia->rowCount() > 0) {
                         while ($mostraNoticia = $rsNoticia->fetch(PDO::FETCH_OBJ)) {
                             echo "<div class='col-6' >";
                             echo "<div class='card-body'>";
-                           echo "<h4><a href='detalheNoticia.php?idNoticia={$mostraNoticia->id_noticia}' class='' >{$mostraNoticia->titulo_noticia}</a></h4>";
+                            echo "<h4><a href='detalheNoticia.php?idNoticia={$mostraNoticia->id_noticia}' class='' >{$mostraNoticia->titulo_noticia}</a></h4>";
                             echo "<p class='card-text'>{$mostraNoticia->resumo_noticia}</p>";
                             echo "<p class='dataAdireita'>";
                             echo date_format(new DateTime($mostraNoticia->data_noticia), 'd/m/Y');
                             echo "</p>";
-                            
+
                             echo "<br>";
                             echo "</div>";
                             echo "</div>";
                         }
                     }
                 }
-                ?>
-                <!--FIM ARRAY NOTICIAS-->
-
-            </div>
+            }
+            ?>
         </div>
         <!--FIM DIV NOTICIAS-->
 
