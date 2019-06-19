@@ -15,7 +15,7 @@
                 if (isset($_SESSION['logado']) && $_SESSION['tipoConta'] == 'nivel1') {
                     $rsNoticia = $pdo->prepare("SELECT * from tb_noticia order by id_noticia DESC");
                 } else {
-                    $rsNoticia = $pdo->prepare("SELECT * FROM tb_noticia WHERE (data_entra <= CURRENT_DATE AND data_sai > CURRENT_DATE) order by id_noticia desc LIMIT 5");
+                    $rsNoticia = $pdo->prepare("SELECT * FROM tb_noticia WHERE (data_entra <= CURRENT_TIMESTAMP AND data_sai > CURRENT_TIMESTAMP) order by id_noticia desc");
                 }
 
                 if ($rsNoticia->execute()) {
